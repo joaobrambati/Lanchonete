@@ -49,5 +49,6 @@ namespace Lanchonete.Models {
         public int CategoriaId { get; set; } // Chave Estrangeira
 
         public virtual Categoria Categoria { get; set; } // Relacionamento com a tabela lanche
+
     }
 }
