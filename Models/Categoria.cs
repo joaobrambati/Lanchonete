@@ -16,7 +16,7 @@ namespace Lanchonete.Models {
 
         [StringLength(200, ErrorMessage = "O tamanho máximo é 100 caracteres")]
         [Required(ErrorMessage = "Informe a descrição da categoria")]
-        [Display(Name = "Nome")]
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
 
