@@ -1,4 +1,5 @@
 ﻿using Lanchonete.Context;
+using Lanchonete.Models;
 using Lanchonete.Repositories;
 using Lanchonete.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace Lanchonete;
                 
             services.AddTransient<ILancheRepository, LancheRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-
+            services.AddScoped(c => CarrinhoCompra.GetCarrinho(c));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
