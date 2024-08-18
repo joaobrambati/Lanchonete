@@ -44,5 +44,13 @@ namespace Lanchonete.Controllers
             return View(lanchesListViewModel);
         }
 
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.Lanches
+                  .FirstOrDefault(x => x.LancheId == lancheId);
+
+            return View(lanche);
+        }
+
     }
 }
