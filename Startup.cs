@@ -19,6 +19,8 @@ namespace Lanchonete;
                 
             services.AddTransient<ILancheRepository, LancheRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+
             services.AddScoped(c => CarrinhoCompra.GetCarrinho(c));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
