@@ -21,12 +21,12 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
+                        @await Component.InvokeAsync("CarrinhoCompraResumo")
                         <form class="navbar-form navbar-right" asp-controller="Lanche" asp-action="Search" method="get">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Procurar Lanche" name="searchString" value="@ViewData["searchString"]" />
                             </div>
                         </form>
-                        @await Component.InvokeAsync("CarrinhoCompraResumo")
                         @await Component.InvokeAsync("CategoriaMenu")
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
