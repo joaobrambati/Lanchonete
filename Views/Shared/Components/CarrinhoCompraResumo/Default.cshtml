@@ -3,7 +3,7 @@
 @if (Model.CarrinhoCompra.CarrinhoCompraItems.Count > 0)
 {
     <a asp-controller="CarrinhoCompra" asp-action="Index">
-        <span><img src="/images/carrinho-compra.png" /></span>
+        <span><img src="/images/carrinho-compra.png" style="width:28px; height:28px;" /></span>
         <span style="color:white">
             @Model.CarrinhoCompra.CarrinhoCompraItems.Count
         </span>
