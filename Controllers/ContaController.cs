@@ -15,7 +15,7 @@ namespace Lanchonete.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet]
+        [HttpGet("login")]
         public IActionResult Login (string retornoUrl)
         {
             return View(new LoginViewModel()
@@ -24,7 +24,7 @@ namespace Lanchonete.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login (LoginViewModel loginVm)
         {
             if (!ModelState.IsValid)
@@ -50,5 +50,32 @@ namespace Lanchonete.Controllers
             return View(loginVm);
         }
 
+        [HttpGet("registro")]
+        public IActionResult Registro ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registro (LoginViewModel registroVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = new IdentityUser { UserName = registroVm.Usuario };
+                var resultado = await _userManager.CreateAsync(usuario, registroVm.Senha);
+
+                if (resultado.Succeeded)
+                {
+                    //await _signInManager.SignInAsync(usuario, isPersistent: false);
+                    return RedirectToAction("Login", "Conta");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Registro", "Erro ao registrar o usuário");
+                }
+            }
+            return View(registroVm);
+        }
     }
 }
