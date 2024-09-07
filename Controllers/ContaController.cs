@@ -15,7 +15,6 @@ namespace Lanchonete.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet("login")]
         public IActionResult Login (string retornoUrl)
         {
             return View(new LoginViewModel()
@@ -50,13 +49,12 @@ namespace Lanchonete.Controllers
             return View(loginVm);
         }
 
-        [HttpGet("registro")]
         public IActionResult Registro ()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("registro")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registro (LoginViewModel registroVm)
         {
