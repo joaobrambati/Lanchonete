@@ -1,4 +1,5 @@
 ﻿using Lanchonete.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace Lanchonete.Controllers
             _signInManager = signInManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Login(string retornoUrl)
         {
             return View(new LoginViewModel()
@@ -23,6 +25,7 @@ namespace Lanchonete.Controllers
             });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVm)
         {
@@ -49,11 +52,13 @@ namespace Lanchonete.Controllers
             return View(loginVm);
         }
 
+        [AllowAnonymous]
         public IActionResult Registro()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registro(LoginViewModel registroVm)
