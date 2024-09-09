@@ -9,13 +9,13 @@ namespace Lanchonete.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public ContaController (UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public ContaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        public IActionResult Login (string retornoUrl)
+        public IActionResult Login(string retornoUrl)
         {
             return View(new LoginViewModel()
             {
@@ -23,8 +23,8 @@ namespace Lanchonete.Controllers
             });
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login (LoginViewModel loginVm)
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginVm)
         {
             if (!ModelState.IsValid)
                 return View(loginVm);
@@ -49,14 +49,14 @@ namespace Lanchonete.Controllers
             return View(loginVm);
         }
 
-        public IActionResult Registro ()
+        public IActionResult Registro()
         {
             return View();
         }
 
-        [HttpPost("registro")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro (LoginViewModel registroVm)
+        public async Task<IActionResult> Registro(LoginViewModel registroVm)
         {
             if (ModelState.IsValid)
             {
@@ -75,5 +75,16 @@ namespace Lanchonete.Controllers
             }
             return View(registroVm);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.User = null;
+
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
