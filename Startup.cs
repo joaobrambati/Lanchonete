@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Lanchonete;
 public class Startup
 {
-    public Startup (IConfiguration configuration)
+    public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
@@ -16,7 +16,7 @@ public class Startup
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices (IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AppDbContext>(options =>
           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -49,7 +49,7 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure (IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
@@ -67,12 +67,16 @@ public class Startup
         app.UseRouting();
 
         app.UseSession();
-        
+
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllerRoute(
+              name: "areas",
+              pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+            );
 
             endpoints.MapControllerRoute(
                 name: "categoriaFiltro",
